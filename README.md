@@ -19,3 +19,16 @@ poetry add <имя пакета> --group auth
 ```bash
 poetry install --only auth
 ```
+
+## AdminPanel
+
+Запустить контейнеры для админ панели
+
+```bash
+docker compose -f path/to/admin_panel/compose.yml --env-file path/to/.env up -d --build
+```
+
+Удалить контейнеры со всеми volume
+```bash
+docker compose -f path/to/admin_panel/compose.yml down -v 
+```
