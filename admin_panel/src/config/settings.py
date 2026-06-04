@@ -18,9 +18,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'movies.apps.MoviesConfig',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,8 +53,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': postgres_settings.POSTGRES_DB,
+        'USER': postgres_settings.POSTGRES_USER,
+        'PASSWORD': postgres_settings.POSTGRES_PASSWORD.get_secret_value(),
+        'HOST': postgres_settings.POSTGRES_HOST,
+        'PORT': postgres_settings.POSTGRES_PORT,
+        'OPTIONS': {
+            'options': '-c search_path=public,content'
+        }
     }
 }
 
