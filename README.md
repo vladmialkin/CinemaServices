@@ -10,7 +10,6 @@
 - ugc
 - admin_panel
 
-
 ```bash
 poetry add <имя пакета> --group auth 
 ```
