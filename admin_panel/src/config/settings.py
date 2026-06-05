@@ -9,6 +9,8 @@ DEBUG = postgres_settings.DEBUG
 
 if not DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1']
+else:
+    ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
