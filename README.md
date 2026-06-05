@@ -32,3 +32,8 @@ docker compose -f path/to/admin_panel/compose.yml --env-file path/to/.env up -d 
 ```bash
 docker compose -f path/to/admin_panel/compose.yml down -v 
 ```
+
+Запустить тесты admin_panel
+```bash
+docker compose -f test-compose.yml --env-file path/to/.env up --build --abort-on-container-exit --exit-code-from admin_panel_test
+```

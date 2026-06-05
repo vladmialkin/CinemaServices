@@ -1,0 +1,26 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Run tests in docker compose
+        run: |
+          cd admin_panel
+          docker compose -f test-compose.yml up --build --abort-on-container-exit --exit-code-from admin_panel_test
+
+      - name: Cleanup
+        if: always()
+        run: |
+          cd admin_panel
+          docker compose -f test-compose.yml down -v
